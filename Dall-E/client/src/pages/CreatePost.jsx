@@ -26,11 +26,15 @@ const CreatePost = () => {
   }
 
   const handleChange = (event) => {
-
+    {/* Below Statement we are Updating the Name Value in UseState Hook */}
+    setForm({...form , [event.target.name] : event.target.value })
   }
 
   const handleSurpriseMe = () => {
-
+    {/* Below we are writing statement to get the Randomly generated Random Prompt Constant and we are
+  setting that the randomly generated index when user clicks on surprise me button */}
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({...form, prompt : randomPrompt})
   }
 
   return (
@@ -96,8 +100,14 @@ const CreatePost = () => {
         {/* Below Div Represents the Text when User user Creates the Image 
         then they can share that with the Community */}
         <div className='mt-10'>
-          <p className=''>Once you have created the image you want, you can share
+          <p className='mt-2 text-[#666e75] text-[14px]'>Once you have created the image you want, you can share
           it with others in the Community</p>
+          <button 
+          type='submit'
+          className='mt-3 text-white bg-[#6469ff] font-medium rounded-md text-sm w-full sm:w-auto px-5
+          py-2.5 text-center'>
+            {loading ? "Sharing..." : "Share with the Community"}
+          </button>
         </div>
       </form>
     </section>
