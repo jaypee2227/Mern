@@ -1,13 +1,17 @@
 const express = require("express")
 const dotenv = require("dotenv");
 const cors = require("cors")
+//const connectDBs = require("./mongodb/connectDBs.js")
 
 const app = express();
 
 //dotenv config
 dotenv.config();
 
-app.use(express.json())
+//calling ConnectDB Function from mongodb folder.
+//connectDBs()
+
+app.use(express.json({limit:"50mb"}))
 app.use(cors())
 
 app.get("/", (req,res)=>{
