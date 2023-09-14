@@ -1,25 +1,32 @@
-const express = require("express")
-const dotenv = require("dotenv");
-const cors = require("cors")
-//const connectDBs = require("./mongodb/connectDBs.js")
+import express from "express";
+import * as dotenv from "dotenv";
+import cors from "cors";
+import connectDB from "./cofig/db.js"
+
+
+dotenv.config();
+
+connectDB()
 
 const app = express();
 
-//dotenv config
-dotenv.config();
-
-//calling ConnectDB Function from mongodb folder.
-//connectDBs()
-
-app.use(express.json({limit:"50mb"}))
 app.use(cors())
+app.use(express.json({limit : "50mb"}))
 
 app.get("/", (req,res)=>{
-    res.send("Hello From DALL-E AI")
+    res.send("Hello World!")
 })
 
-const PORT = 8080 
+const PORT = 8000; 
 
-app.listen(PORT, ()=>{
-    console.log(`Node application Running on PORT ${PORT}`)
-})
+const startServer = () => {
+    try {
+        connectDB()
+        app.listen(PORT, ()=>{
+            console.log(`Port is Running at PORT ${PORT}`)
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
